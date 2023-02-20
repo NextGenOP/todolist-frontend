@@ -1,0 +1,19 @@
+name: Build Project
+on: [push]
+jobs:
+  build_vue:
+    runs-on: ubuntu-latest
+    environment: Production
+    name: Deploy to github pages
+    steps:
+    - uses: actions/checkout@v2
+    - id: Deploy-to-github-pages
+      uses: NextGenOP/ReactPagesAction@1.0.0
+      with:
+        username: 'NextGenOP'
+        reponame: 'invuedious'
+        useyarn: 'true'
+        token: ${{ secrets.GITHUB_TOKEN }}
+      env:
+        REACT_APP_NODE_ENV: ${{ secrets.REACT_APP_NODE_ENV }}
+        REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
