@@ -7,11 +7,13 @@ jobs:
     name: Deploy to github pages
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: feature/with-0ms
     - id: Deploy-to-github-pages
       uses: NextGenOP/ReactPagesAction@1.0.0
       with:
         username: 'NextGenOP'
-        reponame: 'invuedious'
+        reponame: 'todolist-frontend'
         useyarn: 'true'
         token: ${{ secrets.GITHUB_TOKEN }}
       env:
