@@ -4,12 +4,12 @@ jobs:
   build_vue:
     runs-on: ubuntu-latest
     environment: Production
-    name: Deploy to github pages
     steps:
     - uses: actions/checkout@v2
       with:
-        ref: feature/with-0ms
-    - id: Deploy-to-github-pages
+        ref: main
+    - name: Deploy to github pages
+      id: Deploy-to-github-pages
       uses: NextGenOP/ReactPagesAction@1.0.0
       with:
         username: 'NextGenOP'
@@ -19,3 +19,13 @@ jobs:
       env:
         REACT_APP_NODE_ENV: ${{ secrets.REACT_APP_NODE_ENV }}
         REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
+    - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          branch: gh-pages
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ID }}
+          projectName: todolist-frontend
+          directory: .
+          # Optional: Enable this if you want to have GitHub Deployments triggered
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
