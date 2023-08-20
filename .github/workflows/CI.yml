@@ -8,9 +8,13 @@ jobs:
     - uses: actions/checkout@v2
       with:
         ref: main
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '18.14'
+        cache: 'yarn'
     - name: Deploy to github pages
       id: Deploy-to-github-pages
-      uses: NextGenOP/ReactPagesAction@1.0.0
+      uses: NextGenOP/ReactPagesAction@1.0.1
       with:
         username: 'NextGenOP'
         reponame: 'todolist-frontend'
